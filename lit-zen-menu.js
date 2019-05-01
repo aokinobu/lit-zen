@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit-element';
-import { ZenMenuSelectionElement } from './lit-zen-menu-selection.js';
+// import { ZenMenuSelectionElement } from './lit-zen-menu-selection.js';
+
 
 class ZenMenuElement extends LitElement {
 
@@ -25,37 +26,46 @@ class ZenMenuElement extends LitElement {
       <span class="tooltip">Current XP:</span><br />
       <span class="xp" >${this.xp}</span><br />
       <span class="tooltip">Current Menu:</span><br />
-      <div class="menu" >${this.menu}</div>
-  ${this.selectionsArray.map(i => html`<li><zen-menu-selection name=${i.name}></zen-menu-selection></li>`)}
-    
-  
-      <zen-menu-selection on-click="selectionClick"></zen-menu-selection>
+ <slot name="lift"></slot>
+
+  ${this.footerTemplate}
       </div>
     `;
+        // ${this.renderSelections}
   }
 
   constructor() {
     super();
     this.xp = 0;
     this.menu = "";
-    this.selectionsArray = [ new ZenMenuSelectionElement("spell training") ];
-    this.selection = new ZenMenuSelectionElement("weight training");
+    this.selectionsArray = [ { name: "spell training" }, { name: "weight training"} ];
+    // this.selection = new ZenMenuSelectionElement("weight training");
 
   }
 
-  renderSelections() {
+  get renderSelections() {
 
-return this.selections.map(
-      selection => html` 
+  // ${this.selectionsArray.map(i => html`<li><zen-menu-selection name=${i.name}></zen-menu-selection></li>`)}    
+
+    // return this.selections.map(
+      // selection => html` 
+        // <div class="zen-selections">
+        //   <zen-menu-selection name=${this.selectionsArray[0].name}>
+        //   </zen-menu-selection>
+        // </div>
+
+
+
+      return html` 
         <div class="zen-selections">
-          <zen-menu-selection name=${selection.name}>
+          <zen-menu-selection name="weight training">
           </zen-menu-selection>
         </div>
       `
             // ?checked="${todo.complete}" 
             // @change="${ e => this.updateTodoStatus(todo, e.target.checked)}"> 
             // ${todo.task}
-    );
+    // );
   }
 
   updateMenu() {
@@ -77,6 +87,10 @@ return this.selections.map(
     // this.selectionsArray = [...this.selectionsArray, { 
     //   selection: new ZenMenuSelectionElement()
     // }];
+  }
+
+    get footerTemplate() {
+    return html`<footer>footer</footer>`;
   }
 }
 

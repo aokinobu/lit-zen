@@ -1,48 +1,32 @@
 import { LitElement, html } from 'lit-element';
 
-export class ZenMenuSelectionElement extends LitElement {
+class ZenMenuSelectionElement extends LitElement {
 
   static get properties() {
     return {
-      name: {
-        type: Boolean
-      },
-      chosen: {
-        type: Boolean
+      selectionName: {
+        type: String
       }
-    }
+    };
   }
 
-  static get template() {
+  render() {
     return html`
-      <style> </style>
-      <span class="title">This is a Zen Menu Selection.</br></span>
-      Name: ${this.name}
-      Chosen: ${this.chosen}
+      <style> .progress { color: blue;   display: block;  float: left;   border: 1px solid red;   } </style>
+      <div class="menuselection">
+      <span class="title">This is the Zen Menu Selection Component.</br></span>
+      <span class="tooltip">Selection Name:${this.selectionName}</span><br />
+      </div>
     `;
   }
 
   constructor() {
     super();
-    this.name = '';
-    this.chosen = false;
+    this.selectionName = "";
   }
 
-  ZenMenuSelectionElement(name) {
-    this.name = name;
-  }
-
-  ready() {
-    super.ready();
-  }
-
-  click() {
-    console.log("click");
-    this.chosen = true;
-  }
-
-  canDisplay() {
-
+  firstUpdated() {
+    console.log("zen-menu-selection firstUpdated");
   }
 }
 

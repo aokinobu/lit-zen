@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit-element';
 import './lit-zen-progress.js';
 import './lit-zen-menu.js';
+import './lit-zen-menu-selection.js';
 
 class ZenElement extends LitElement {
 
@@ -22,10 +23,14 @@ class ZenElement extends LitElement {
 solid purple;   } </style>
     <div class="zen">
       <p>Hello, Welcome to ${this.name}!</p>
+
       <span class="tooltip">Here is your progress</span><br />
       <zen-progress></zen-progress></br>
       <span class="tooltip">Choose something from the menu</span><br />
-      <zen-menu class="xp" ></zen-menu>
+      <zen-menu class="xp" >
+${this.renderSelections}</zen-menu>
+      
+
     </div>`;
   }
 
@@ -67,6 +72,33 @@ solid purple;   } </style>
 
   handleEvent(e) {
     console.log(e.bubbles);
+  }
+
+
+  get renderSelections() {
+
+  // ${this.selectionsArray.map(i => html`<li><zen-menu-selection name=${i.name}></zen-menu-selection></li>`)}    
+
+    // return this.selections.map(
+      // selection => html` 
+        // <div class="zen-selections">
+        //   <zen-menu-selection name=${this.selectionsArray[0].name}>
+        //   </zen-menu-selection>
+        // </div>
+
+
+
+      return html` 
+<p slot="lift"><zen-menu-selection selectionName="weight lifting" @click="${this.weightLifting}"></zen-menu-selection></p>
+      `
+            // ?checked="${todo.complete}" 
+            // @change="${ e => this.updateTodoStatus(todo, e.target.checked)}"> 
+            // ${todo.task}
+    // );
+  }
+
+  weightLifting() {
+    console.log("weight");
   }
 
 }
