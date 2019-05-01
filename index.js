@@ -80,11 +80,14 @@ ${this.renderSelections}</zen-menu>
   }
 
   weightLifting(e) {
-    console.log(e);
     console.log("weight");
+    console.log(e);
+    console.log(e.target.selectionName);
   }
-  spellCasting() {
+  spellCasting(e) {
     console.log("spellCasting");
+    console.log(e);
+    console.log(e.target.selectionName);
   }
 }
 
