@@ -38,15 +38,6 @@ ${this.renderSelections}</zen-menu>
     console.log("zen-main firstUpdated");
   }
 
-  updated(changedProps) {
-    console.log("updated");
-    console.log(changedProps.get('xp'));
-  }
-
-  onXpChanged() {
-    console.log("xp changed");
-  }
-
   modifyXp(e) {
     console.log("xp modified");
     console.log(e);
@@ -58,16 +49,6 @@ ${this.renderSelections}</zen-menu>
     let element = this.shadowRoot.querySelector('zen-menu');
     element.xp = e.detail.xp;
     console.log(element);
-    element.updateMenu();
-  }
-
-  modifyXpClick(e) {
-    console.log("click xp modified");
-    console.log(e);
-    console.log(e.composedPath()[0])
-    let element = this.shadowRoot.querySelector('zen-menu');
-    console.log(element);
-    element.updateMenu();
   }
 
   handleEvent(e) {
@@ -90,6 +71,7 @@ ${this.renderSelections}</zen-menu>
 
       return html` 
 <p slot="lift"><zen-menu-selection selectionName="weight lifting" @click="${this.weightLifting}"></zen-menu-selection></p>
+<p slot="spell"><zen-menu-selection selectionName="spell casting" @click="${this.spellCasting}"></zen-menu-selection></p>
       `
             // ?checked="${todo.complete}" 
             // @change="${ e => this.updateTodoStatus(todo, e.target.checked)}"> 
@@ -97,10 +79,13 @@ ${this.renderSelections}</zen-menu>
     // );
   }
 
-  weightLifting() {
+  weightLifting(e) {
+    console.log(e);
     console.log("weight");
   }
-
+  spellCasting() {
+    console.log("spellCasting");
+  }
 }
 
 customElements.define('lit-zen', ZenElement);
