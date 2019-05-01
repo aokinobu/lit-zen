@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit-element';
 import './lit-zen-progress.js';
 import './lit-zen-menu.js';
 
-class MyElement extends LitElement {
+class ZenElement extends LitElement {
 
   static get properties() {
     return {
@@ -18,13 +18,15 @@ class MyElement extends LitElement {
 
   render() {
     return html`
-    <style> .title { color: green; } .xp { color: purple;   display: block;  float: left;   border: 1px 
+    <style> .title { color: green; } .xp { color: purple;   display: block;  float: left;   border: 1px
 solid purple;   } </style>
-    <p>Hello, Welcome to ${this.name}!</p>
-    <span class="tooltip">Here is your progress</span><br />
-    <zen-progress></zen-progress></br> 
-    <span class="tooltip">Choose something from the menu</span><br />
-    <zen-menu class="xp"></zen-menu>`;
+    <div class="zen">
+      <p>Hello, Welcome to ${this.name}!</p>
+      <span class="tooltip">Here is your progress</span><br />
+      <zen-progress></zen-progress></br>
+      <span class="tooltip">Choose something from the menu</span><br />
+      <zen-menu class="xp" ></zen-menu>
+    </div>`;
   }
 
   firstUpdated() {
@@ -69,4 +71,4 @@ solid purple;   } </style>
 
 }
 
-customElements.define('wc-zen', MyElement);
+customElements.define('wc-zen', ZenElement);

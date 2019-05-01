@@ -2,11 +2,13 @@ import { LitElement, html } from 'lit-element';
 
 class ZenMenuSelectionElement extends LitElement {
 
-  static get properties() { 
+  static get properties() {
     return {
+      name: {
+        type: Boolean
+      },
       chosen: {
-        type: Boolean,
-        value: ""
+        type: Boolean
       }
     }
   }
@@ -15,13 +17,14 @@ class ZenMenuSelectionElement extends LitElement {
     return html`
       <style> </style>
       <span class="title">This is a Zen Menu Selection.</br></span>
-      [[chosen]]
+      ${this.chosen}
     `;
   }
 
   constructor() {
     super();
-    this.name = 'selection1';
+    this.name = '';
+    this.chosen = false;
   }
 
   ready() {

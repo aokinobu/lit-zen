@@ -3,7 +3,7 @@ import './lit-zen-menu-selection.js';
 
 class ZenMenuElement extends LitElement {
 
-  static get properties() { 
+  static get properties() {
     return {
       xp: {
         // notify: true,
@@ -27,7 +27,7 @@ class ZenMenuElement extends LitElement {
       <span class="tooltip">Current Menu:</span><br />
       <div class="menu" >${this.menu}</div>
       <zen-menu-selection on-click="selectionClick"></zen-menu-selection>
-      </menu>
+      </div>
     `;
   }
 
