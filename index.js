@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit-element';
-import './polymer-zen-progress.js';
-import './polymer-zen-menu.js';
+import './lit-zen-progress.js';
+import './lit-zen-menu.js';
 
 class MyElement extends LitElement {
 
