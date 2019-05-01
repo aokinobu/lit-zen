@@ -3,6 +3,7 @@ import './lit-zen-progress.js';
 import './lit-zen-menu.js';
 import './lit-zen-menu-selection.js';
 import './lit-zen-status.js';
+import './lit-zen-commander.js';
 
 class ZenElement extends LitElement {
 
