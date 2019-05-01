@@ -71,4 +71,4 @@ solid purple;   } </style>
 
 }
 
-customElements.define('wc-zen', ZenElement);
+customElements.define('lit-zen', ZenElement);
