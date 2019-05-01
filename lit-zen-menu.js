@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit-element';
-import './ZenSelectionElement.js';
+import './lit-zen-menu-selection.js';
 
 class ZenMenuElement extends LitElement {
 
