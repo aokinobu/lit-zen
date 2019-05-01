@@ -11,11 +11,12 @@ class ZenMenuElement extends LitElement {
         type: Number,
          hasChanged(newVal, oldVal) {
           if (newVal > oldVal) {
-            console.log(`${newVal} > ${oldVal}. hasChanged: true.`);
+            // console.log(`${newVal} > ${oldVal}. hasChanged: true.`);
+            // kick off rerendering of Selections
             return true;
           }
           else {
-            console.log(`${newVal} <= ${oldVal}. hasChanged: false.`);
+            // console.log(`${newVal} <= ${oldVal}. hasChanged: false.`);
             return false;
           }
         }
@@ -55,7 +56,7 @@ class ZenMenuElement extends LitElement {
   }
 
 get renderSelectionSlots() {
-  this.selectionsArray.map(i => console.log(i.name));
+  // this.selectionsArray.map(i => console.log(i.name));
       return html` 
 ${this.selectionsArray.map(i => i.display? html`<slot name="${i.name}"></slot>`:html``)}
 `

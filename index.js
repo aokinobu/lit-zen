@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit-element';
 import './lit-zen-progress.js';
 import './lit-zen-menu.js';
 import './lit-zen-menu-selection.js';
+import './lit-zen-status.js';
 
 class ZenElement extends LitElement {
 
@@ -15,6 +16,7 @@ class ZenElement extends LitElement {
     super();
     this.name = 'Zen Project';
     this.addEventListener('zen-event-xp-changed', this.modifyXp);
+    this.elementCount = 0;
   }
 
   render() {
@@ -29,14 +31,16 @@ solid purple;   } </style>
       <span class="tooltip">Choose something from the menu</span><br />
       <zen-menu class="xp" >
 ${this.renderSelections}</zen-menu>
+<zen-status></zen-status>
+
       
 
     </div>`;
   }
 
-  firstUpdated() {
-    console.log("zen-main firstUpdated");
-  }
+  // firstUpdated() {
+  //   console.log("zen-main firstUpdated");
+  // }
 
   modifyXp(e) {
     console.log("xp modified");
@@ -83,11 +87,32 @@ ${this.renderSelections}</zen-menu>
     console.log("weight");
     console.log(e);
     console.log(e.target.selectionName);
+    let element = this.shadowRoot.querySelector('zen-status');
+        let liftSelection = { name: "lift", count: this.elementCount++ };
+
+        element.setAttribute("selectionsArray", JSON.stringify([...element.selectionsArray, liftSelection]));
+        element.checkStatus();
+    // element.selectionsArray = element.selectionsArray push(liftSelection);
+    // element.should
+    // element.addSelection(liftSelection);
+    console.log(element);
+
   }
   spellCasting(e) {
     console.log("spellCasting");
     console.log(e);
     console.log(e.target.selectionName);
+    let element = this.shadowRoot.querySelector('zen-status');
+        let liftSelection = { name: "spell", count: this.elementCount++ };
+    // element.selectionsArray.push({ name: "spell", display: true });
+
+        element.setAttribute("selectionsArray", JSON.stringify([...element.selectionsArray, liftSelection]));
+        element.checkStatus();
+    // element.selectionsArray = element.selectionsArray push(liftSelection);
+    // element.should
+    // element.addSelection(liftSelection);
+    console.log(element);
+
   }
 }
 
