@@ -1,0 +1,11 @@
+{
+  "name": "polymer-zen",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@polymer/polymer": "3.0.2",
+    "@webcomponents/webcomponentsjs": "2.0.0",
+    "polymer-zen-menu": "git+https://gitlab.com/projectzen/polymer-zen-menu.git",
+    "polymer-zen-progress": "git+https://gitlab.com/projectzen/polymer-zen-progress.git"
+  }
+}

@@ -1,0 +1,17 @@
+image: registry.gitlab.com/aokinobu/docker-jekyll-webpack:0.1
+  
+before_script:
+  - npm install
+  - webpack
+  - cp index.html public
+  - cp index.js public
+
+pages:
+  stage: deploy
+  script:
+  - echo 'blah'
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
