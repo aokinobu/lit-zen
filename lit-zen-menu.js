@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit-element';
-import './lit-zen-menu-selection.js';
+import { ZenMenuSelectionElement } from './lit-zen-menu-selection.js';
 
 class ZenMenuElement extends LitElement {
 
@@ -26,6 +26,9 @@ class ZenMenuElement extends LitElement {
       <span class="xp" >${this.xp}</span><br />
       <span class="tooltip">Current Menu:</span><br />
       <div class="menu" >${this.menu}</div>
+  ${this.selectionsArray.map(i => html`<li><zen-menu-selection name=${i.name}></zen-menu-selection></li>`)}
+    
+  
       <zen-menu-selection on-click="selectionClick"></zen-menu-selection>
       </div>
     `;
@@ -35,8 +38,25 @@ class ZenMenuElement extends LitElement {
     super();
     this.xp = 0;
     this.menu = "";
+    this.selectionsArray = [ new ZenMenuSelectionElement("spell training") ];
+    this.selection = new ZenMenuSelectionElement("weight training");
+
   }
 
+  renderSelections() {
+
+return this.selections.map(
+      selection => html` 
+        <div class="zen-selections">
+          <zen-menu-selection name=${selection.name}>
+          </zen-menu-selection>
+        </div>
+      `
+            // ?checked="${todo.complete}" 
+            // @change="${ e => this.updateTodoStatus(todo, e.target.checked)}"> 
+            // ${todo.task}
+    );
+  }
 
   updateMenu() {
     console.log("menu was updated when XP was:" + this.xp);
@@ -51,6 +71,12 @@ class ZenMenuElement extends LitElement {
     let element = this.shadowRoot.querySelector('zen-menu-selection');
     element.click();
     console.log(element.name);
+  }
+
+  addSelection() {
+    // this.selectionsArray = [...this.selectionsArray, { 
+    //   selection: new ZenMenuSelectionElement()
+    // }];
   }
 }
 

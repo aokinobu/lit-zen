@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit-element';
 
-class ZenMenuSelectionElement extends LitElement {
+export class ZenMenuSelectionElement extends LitElement {
 
   static get properties() {
     return {
@@ -17,7 +17,8 @@ class ZenMenuSelectionElement extends LitElement {
     return html`
       <style> </style>
       <span class="title">This is a Zen Menu Selection.</br></span>
-      ${this.chosen}
+      Name: ${this.name}
+      Chosen: ${this.chosen}
     `;
   }
 
@@ -25,6 +26,10 @@ class ZenMenuSelectionElement extends LitElement {
     super();
     this.name = '';
     this.chosen = false;
+  }
+
+  ZenMenuSelectionElement(name) {
+    this.name = name;
   }
 
   ready() {
