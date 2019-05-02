@@ -66,7 +66,12 @@ class ZenStatusElement extends LitElement {
       <span class="title">This is the Zen Status Component.<br /></span>
       <span class="tooltip">Current Selections:</span><br />
       <span class="selections" >${this.renderSelections}</span><br />
+      <button @click=${this.startWorker}>hi</button>
+      <button @click=${this.stopWorker}>stop</button>
+      result:${this.result}
+
       <span > ${this.footerTemplate} </span>
+
       </div>
     `;
     // <button @click="${this.addSelection(liftSelection)}">Click</button>
@@ -77,6 +82,8 @@ class ZenStatusElement extends LitElement {
     console.log("ZenStatusElement");
     // static array of selection type
     this.selectionsArray = [];
+    this.worker = undefined;
+    this.result = "";
   }
 
   get renderSelections() {
@@ -182,6 +189,24 @@ class ZenStatusElement extends LitElement {
       element.kickOff();
     }
   }
+
+  startWorker() {
+  if(typeof(Worker) !== "undefined") {
+    if(typeof(this.w) == "undefined") {
+      this.w = new Worker("./menuselectionworker.js");
+    }
+    this.w.onmessage = function(event) {
+      this.result = event.data;
+    };
+  } else {
+    this.result = "Sorry, your browser does not support Web Workers...";
+  }
+}
+
+stopWorker() { 
+  this.w.terminate();
+  this.w = undefined;
+}
 }
 
 customElements.define('zen-status', ZenStatusElement);

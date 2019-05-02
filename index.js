@@ -50,9 +50,7 @@ ${this.renderSelections}</zen-menu>
     console.log(changedProps.get('xp'));
   }
 
-  onXpChanged() {
-    console.log("xp changed");
-  }
+
 
   modifyXp(e) {
     console.log("xp modified");
