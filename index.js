@@ -33,7 +33,6 @@ solid purple;   } </style>
       <zen-menu class="xp" >
 ${this.renderSelections}</zen-menu>
 <zen-status></zen-status>
-<<<<<<< HEAD
 
     </div>`;
   }
@@ -99,7 +98,6 @@ ${this.renderSelections}</zen-menu>
     console.log("weight");
     console.log(e);
     console.log(e.target.selectionName);
-<<<<<<< HEAD
     let element = this.shadowRoot.querySelector('zen-status');
         let liftSelection = { name: "lift", count: this.elementCount++ };
 
@@ -127,14 +125,6 @@ ${this.renderSelections}</zen-menu>
     console.log(element);
 
   }
-=======
-  }
-  spellCasting(e) {
-    console.log("spellCasting");
-    console.log(e);
-    console.log(e.target.selectionName);
-  }
->>>>>>> d1a6e5765bee3607f7af1156f281b484bec62cab
 }
 
 customElements.define('lit-zen', ZenElement);
