@@ -35,7 +35,11 @@ class ZenStatusElement extends LitElement {
       },
       menuSelectionsArray: {
         type: Array
+      },
+      result: {
+        type: String
       }
+
       // xp: {
       //   // notify: true,
       //   type: Number,
@@ -67,6 +71,7 @@ class ZenStatusElement extends LitElement {
       <span class="selections" >${this.renderSelections}</span><br />
       <button @click=${this.startWorker}>hi</button>
       <button @click=${this.stopWorker}>stop</button>
+
       result:${this.result}
 
       <span > ${this.footerTemplate} </span>
@@ -83,6 +88,11 @@ class ZenStatusElement extends LitElement {
     this.selectionsArray = [];
     this.worker = undefined;
     this.result = "";
+    // this.canvas = this.shadowRoot.createElement('canvas');
+    // this.shadowRoot.appendChild(this.canvas);
+    this.addEventListener('resize', this.onResize);
+    this.timer = undefined;
+
   }
 
   get renderSelections() {
@@ -160,60 +170,31 @@ class ZenStatusElement extends LitElement {
 
   }
 
-
-  async kickOffAll() {
-    console.log("kickOffAll");
-    let element = this.shadowRoot.querySelectorAll('zen-menu-selection');
-    console.log("zen-menu-selection");
-    console.log(element.length);
-    console.log(element);
-    let i = 0;
-
-    for (i = 0; i < element.length; ++i) {
-      console.log(element[i]);
-
-    }
-  }
-
-  updated(changedProps) {
-    console.log("changedProps");
-    console.log(changedProps);
-    let i = 0;
-
-    for (i = 0; i < this.selectionsArray.length; i++) {
-      console.log(this.selectionsArray[i].name + this.selectionsArray[i].count);
-      let element = this.shadowRoot.getElementById(this.selectionsArray[i].name + this.selectionsArray[i].count);
-      console.log("zen-menu-selection");
-      console.log(element);
-      element.kickOff();
-    }
-  }
-
   startWorker() {
     console.log("start worker");
-    this.result="started";
-  if(typeof(Worker) !== "undefined") {
-    this.result="no undefined";
-    if(typeof(this.w) == "undefined") {
-    this.result="created worker";
-      this.w = new Worker("./menuselectionworker.js");
-    }
-    this.w.onmessage = function(event) {
-    console.log("received data");
-    console.log(event);
-      this.result = event.data;
-    };
-  } else {
-    console.log("no support");
-    this.result = "Sorry, your browser does not support Web Workers...";
+    this.result = "started";
+    this.timer = setInterval(this.throwXp, 3000, this);
+    console.log(this.timer);
   }
-}
 
-stopWorker() { 
+  stopWorker() {
     console.log("stop");
-  this.w.terminate();
-  this.w = undefined;
-}
+    clearTimeout(this.timer);
+  }
+
+  async throwXp(dat) {
+
+    console.log("xp!");
+    // self = dat;
+    dat.result = "xp!";
+
+    let event = new CustomEvent('zen-event-xp-changed', {
+      detail: { message: 'xp changed', xp: 100 },
+      bubbles: true,
+      composed: true
+    });
+    dat.dispatchEvent(event);
+  }
 }
 
 customElements.define('zen-status', ZenStatusElement);
