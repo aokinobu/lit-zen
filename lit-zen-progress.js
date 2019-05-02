@@ -26,20 +26,41 @@ class ZenProgressElement extends LitElement {
     this.xp = 0;
   }
 
+  firstUpdated(changedProps) {
+    super.firstUpdated(changedProps);
+    this.load();
+  }
+
   updated(changedProps) {
-    this.checkStorage(changedProps);
+    super.updated(changedProps);
+    this.load();
   }
 
   checkStorage(changedProps) {
     if (typeof(Storage) !== "undefined") {
       if (localStorage.xp === undefined || changedProps.get("xp") !== undefined) {
-        localStorage.xp = this.xp;
+        this.store();
       } else {
-          this.xp = Number(localStorage.xp);
+        this.load();
       }
     } else {
       // this.shadowRoot.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
     }
+  }
+
+  store() {
+    localStorage.xp = Number(this.xp);
+  }
+
+  load() {
+    if (localStorage.xp !== undefined) {
+      this.xp = Number(localStorage.xp);
+    }
+  }
+
+  updateXp(xp) {
+    this.xp = xp;
+    this.store();
   }
 
   click() {

@@ -35,25 +35,31 @@ class ZenMenuElement extends LitElement {
     this.checkStorage();
   }
 
+  firstUpdated(changedProps) {
+    super.firstUpdated(changedProps);
+    this.loadArray();
+  }
+
   updated(changedProps) {
-    this.checkStorage(changedProps);
+    super.updated(changedProps);
+    this.loadArray();
   }
 
   checkStorage(changedProps) {
     console.log(changedProps);
     if (typeof (Storage) !== "undefined") {
-      if (localStorage.menuxp === undefined || changedProps.get("xp") !== undefined) {
-        localStorage.menuxp = this.xp;
-      } else {
+      if (localStorage.menuxp !== undefined) {
         this.xp = Number(localStorage.menuxp);
+      } else {
+        localStorage.menuxp = this.xp;
       }
+      this.checkStorageArray();
     } else {
       // this.shadowRoot.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
     }
-    this.checkStorage();
   }
 
-  checkStorage() {
+  checkStorageArray() {
     if (localStorage.menuSelectionsArray === undefined) {
       this.storeArray();
     } else {
@@ -68,8 +74,11 @@ class ZenMenuElement extends LitElement {
   }
 
   loadArray() {
-    console.log("load menu");
-    this.selectionsArray = JSON.parse(localStorage.menuSelectionsArray);
+    if (localStorage.menuSelectionsArray !== undefined) {
+      console.log("load menu");
+      this.selectionsArray = JSON.parse(localStorage.menuSelectionsArray);
+      console.log(this.selectionsArray);
+    }
   }
 
   get renderSelections() {
@@ -77,6 +86,7 @@ class ZenMenuElement extends LitElement {
   }
 
   checkCost(e) {
+    console.log("checkCost");
     var source = e.target || e.srcElement;
     // check the cost if xpcost < current xp
     let i = 0;
@@ -87,8 +97,8 @@ class ZenMenuElement extends LitElement {
           // remove selection from menu
           this.selectionsArray[i].display = false;
           this.selectionsArray[i].purchased = true;
-          this.requestUpdate();
           this.storeArray();
+          this.requestUpdate();
           // update xp -cost
           let event = new CustomEvent('zen-event-xp-changed', {
             detail: { message: 'xp changed', xp: -this.selectionsArray[i].cost },
@@ -117,6 +127,11 @@ class ZenMenuElement extends LitElement {
       }
     }
     this.requestUpdate();
+    this.storeArray();
+  }
+
+  updateXp(xp) {
+    this.xp = xp;
     this.storeArray();
   }
 }

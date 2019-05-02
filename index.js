@@ -41,9 +41,9 @@ solid purple;   } </style>
 
   xpChanged(e) {
     let elementProgress = this.shadowRoot.querySelector('zen-progress');
-    elementProgress.xp = elementProgress.xp + e.detail.xp;
+    elementProgress.updateXp(elementProgress.xp + e.detail.xp);
     let element = this.shadowRoot.querySelector('zen-menu');
-    element.xp = element.xp + e.detail.xp;
+    element.updateXp(element.xp + e.detail.xp);
     element.checkDisplayCondition();
   }
 

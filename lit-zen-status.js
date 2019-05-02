@@ -29,16 +29,27 @@ class ZenStatusElement extends LitElement {
     this.selectionsArray = [];
   }
 
+  firstUpdated(changedProps) {
+    super.firstUpdated(changedProps);
+    this.loadArray();
+    this.updateIntervals();
+  }
+
+  updated(changedProps) {
+    super.updated(changedProps);
+    // this.loadArray();
+  }
+
   checkStorage(changedProps) {
     console.log(changedProps);
     if (typeof (Storage) !== "undefined") {
-      this.checkStorage();
+      this.checkStorageArray();
     } else {
       // this.shadowRoot.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
     }
   }
 
-  checkStorage() {
+  checkStorageArray() {
     if (localStorage.statusSelectionsArray === undefined) {
       this.storeArray();
     } else {
@@ -53,21 +64,24 @@ class ZenStatusElement extends LitElement {
   }
 
   loadArray() {
-    console.log("load status");
-    this.selectionsArray = JSON.parse(localStorage.statusSelectionsArray);
+    if (localStorage.statusSelectionsArray !== undefined) {
+      console.log("load status");
+      this.selectionsArray = JSON.parse(localStorage.statusSelectionsArray);
+    }
   }
 
   get renderSelections() {
     return this.selectionsArray.map(i => html`<zen-menu-selection id="${i.name}" selectionName=${i.name} isMenu="false"></zen-menu-selection>`);
   }
 
-  addSelection(name) {
+  async addSelection(name) {
     this.selectionsArray.push(name);
-    this.requestUpdate();
-    this.storeArray();
+    await this.requestUpdate();
+    this.checkIntervals();
   }
 
   checkIntervals() {
+    console.log("checkIntervals");
     let i = 0;
     for (i = 0; i < this.selectionsArray.length; i++) {
       if (this.selectionsArray[i].processing === undefined || !this.selectionsArray[i].processing) {
@@ -77,6 +91,22 @@ class ZenStatusElement extends LitElement {
       }
     }
     this.storeArray();
+  }
+
+  async updateIntervals() {
+    console.log("updateIntervals");
+    console.log(this.selectionsArray);
+    await this.updateComplete;
+    let i = 0;
+    for (i = 0; i < this.selectionsArray.length; i++) {
+      console.log(this.selectionsArray[i].processing === undefined || this.selectionsArray[i].processing);
+      if (this.selectionsArray[i].processing === undefined || this.selectionsArray[i].processing) {
+        console.log(this.selectionsArray[i].name);
+        let element = this.shadowRoot.getElementById(this.selectionsArray[i].name);
+        console.log( element);
+        element.startWorker(this.selectionsArray[i].interval, this.selectionsArray[i].xp);
+      }
+    }
   }
 }
 
