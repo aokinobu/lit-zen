@@ -5,7 +5,6 @@ class ZenStatusElement extends LitElement {
 
   static get properties() {
     return {
-<<<<<<< HEAD
       selectionsArray: {
         type: Array,
         hasChanged(newVal, oldVal) {
@@ -37,7 +36,6 @@ class ZenStatusElement extends LitElement {
       menuSelectionsArray: {
         type: Array
       }
-=======
       // xp: {
       //   // notify: true,
       //   type: Number,
@@ -55,33 +53,23 @@ class ZenStatusElement extends LitElement {
       // menu: {
       //   type: String
       // }
->>>>>>> d1a6e5765bee3607f7af1156f281b484bec62cab
     }
   }
 
   render() {
-<<<<<<< HEAD
     let liftSelection = { name: "lift" };
-=======
->>>>>>> d1a6e5765bee3607f7af1156f281b484bec62cab
     return html`
       <style> .xp { color: orange;   display: block;  float: left;   border: 1px solid orange;   }
       .menu { color: red;   display: block;  float: left;   border: 1px solid red;   }
        </style>
        <div class="zen-status">
-      <span class="title">This is the Zen Status Component.</br></span>
+      <span class="title">This is the Zen Status Component.<br /></span>
       <span class="tooltip">Current Selections:</span><br />
       <span class="selections" >${this.renderSelections}</span><br />
-<<<<<<< HEAD
       <span > ${this.footerTemplate} </span>
       </div>
     `;
     // <button @click="${this.addSelection(liftSelection)}">Click</button>
-=======
-      ${this.footerTemplate}
-      </div>
-    `;
->>>>>>> d1a6e5765bee3607f7af1156f281b484bec62cab
   }
 
   constructor() {
@@ -126,9 +114,6 @@ class ZenStatusElement extends LitElement {
     console.log(element.name);
   }
 
-<<<<<<< HEAD
-
-
   // addSelection(selection) {
   //   console.log("add");
   //   console.log(selection);
@@ -138,7 +123,6 @@ class ZenStatusElement extends LitElement {
   //   //   selection: new ZenMenuSelectionElement()
   //   // }];
   // }
-=======
   addSelection(name) {
     this.selectionsArray.push({ name: name, display: true });
     // , { name: "spell", display: true }
@@ -146,12 +130,10 @@ class ZenStatusElement extends LitElement {
     //   selection: new ZenMenuSelectionElement()
     // }];
   }
->>>>>>> d1a6e5765bee3607f7af1156f281b484bec62cab
 
   get footerTemplate() {
     return html`<footer>footer</footer>`;
   }
-<<<<<<< HEAD
 
   firstUpdated() {
     console.log("zen-status firstUpdated");
@@ -200,8 +182,6 @@ class ZenStatusElement extends LitElement {
       element.kickOff();
     }
   }
-=======
->>>>>>> d1a6e5765bee3607f7af1156f281b484bec62cab
 }
 
 customElements.define('zen-status', ZenStatusElement);
