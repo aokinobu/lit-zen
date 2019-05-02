@@ -5,12 +5,7 @@ class ZenMenuElement extends LitElement {
   static get properties() {
     return {
       xp: {
-        // notify: true,
-        type: Number,
-        hasChanged(newVal, oldVal) {
-          console.log(`${newVal} ${oldVal}. hasChanged: true.`);
-          return true;
-        }
+        type: Number
       },
       menu: {
         type: String
@@ -36,25 +31,18 @@ class ZenMenuElement extends LitElement {
     this.xp = 0;
     this.menu = "";
     // static array of selection data
-    this.selectionsArray = [{ name: "lift", display: false, displayCondition: 100, cost: 100, purchased: false }, { name: "spell", display: false, displayCondition: 500, cost: 500, purchased: false }];
+    this.selectionsArray = [{ name: "lift", display: false, displayCondition: 100, cost: 100, purchased: false, xp: 10, interval: 1000 }, { name: "spell", display: false, displayCondition: 500, cost: 500, purchased: false, xp: 1000, interval: 2000 }];
   }
 
   get renderSelections() {
     return html`${this.selectionsArray.map(i => i.display ? html`<zen-menu-selection selectionName="${i.name}" @click="${this.checkCost}" id="${i.name}">` : html``)}`;
   }
 
-  // selectionClick(e) {
-  //   let element = this.shadowRoot.querySelector('zen-menu-selection');
-  //   element.click();
-  //   console.log(element.name);
-  // }
-
   checkCost(e) {
     var source = e.target || e.srcElement;
     // check the cost if xpcost < current xp
     let i = 0;
     for (i = 0; i < this.selectionsArray.length; ++i) {
-      console.log(this.selectionsArray[i]);
       // id of element is the same as menuSelectionsArray
       if (this.selectionsArray[i].name === source.id) {
         if (this.selectionsArray[i].cost < this.xp) {
@@ -62,7 +50,6 @@ class ZenMenuElement extends LitElement {
           this.selectionsArray[i].display = false;
           this.selectionsArray[i].purchased = true;
           this.requestUpdate();
-          console.log(this.selectionsArray[i].cost + "<" + this.xp);
           // update xp -cost
           let event = new CustomEvent('zen-event-xp-changed', {
             detail: { message: 'xp changed', xp: -this.selectionsArray[i].cost },

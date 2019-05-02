@@ -19,7 +19,6 @@ class ZenMenuSelectionElement extends LitElement {
       <div class="menuselection">
       <span class="title">This is the Zen Menu Selection Component.<br /></span>
       <span class="tooltip">Selection Name:${this.selectionName}</span><br />
-      <button @click=${this.startWorker}>get to work</button>
       <button @click=${this.stopWorker}>stop working</button>
       </div>
     `;
@@ -29,28 +28,30 @@ class ZenMenuSelectionElement extends LitElement {
     super();
     this.selectionName = "";
     this.running = false;
-    this.timer = undefined;
+    this.isMenu = true;
+    this.interval = undefined;
   }
 
-  startWorker() {
-    this.timer = setInterval(this.throwXp, 3000, this);
-    console.log(this.timer);
+  // firstUpdated(changedProperties) { 
+  //   console.log("firstUpdated");
+  //   console.log(changedProperties);
+  //   console.log(this.isMenu);
+  //   if (this.interval === undefined && !this.isMenu)
+  //     this.startWorker();
+  //   console.log(this.interval);
+  // }
+
+  startWorker(time, xp) {
+    this.interval = setInterval(this.throwXp, time, this, xp);
   }
 
   stopWorker() {
-    console.log("stop");
-    console.log(this.timer);
-    clearInterval(this.timer);
+    clearInterval(this.interval);
   }
 
-  async throwXp(dat) {
-
-    console.log("xp!");
-    // self = dat;
-    dat.result = "xp!";
-
+  async throwXp(dat, xpValue) {
     let event = new CustomEvent('zen-event-xp-changed', {
-      detail: { message: 'xp changed', xp: 100 },
+      detail: { message: 'xp changed', xp: xpValue },
       bubbles: true,
       composed: true
     });

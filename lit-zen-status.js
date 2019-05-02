@@ -12,7 +12,6 @@ class ZenStatusElement extends LitElement {
   }
 
   render() {
-    let liftSelection = { name: "lift" };
     return html`
       <style> .zen-status { color: DarkBlue;   display: block;  clear: both;   border: 1px solid DarkBlue;   }
       </style>
@@ -30,8 +29,20 @@ class ZenStatusElement extends LitElement {
     this.selectionsArray = [];
   }
 
+  firstUpdated(changedProperties) {
+    // let elements = this.shadowRoot.querySelectorAll('zen-menu-selection');
+    // let i = 0;
+    // for(i = 0; i < elements.length; i++) {
+    //   elements[i].startWorker();
+    // }
+  }
+
   get renderSelections() {
-    return this.selectionsArray.map(i => html`<zen-menu-selection id="${i.name}" selectionName=${i.name}></zen-menu-selection>`);
+    return this.selectionsArray.map(i => html`<zen-menu-selection id="${i.name}" selectionName=${i.name} isMenu="false"></zen-menu-selection>`);
+  }
+
+  updated(changedProperties) {
+    this.checkIntervals();
   }
 
   async addSelection(name) {
@@ -39,6 +50,20 @@ class ZenStatusElement extends LitElement {
     console.log(name);
     this.selectionsArray.push(name);
     this.requestUpdate();
+  }
+
+  checkIntervals() {
+    console.log("checking intervals");
+    let i = 0;
+    for (i = 0; i < this.selectionsArray.length; i++) {
+      console.log(this.selectionsArray[i].name);
+      console.log(this.selectionsArray[i].processing);
+      if (this.selectionsArray[i].processing === undefined || !this.selectionsArray[i].processing) {
+        let element = this.shadowRoot.getElementById(this.selectionsArray[i].name);
+        element.startWorker(this.selectionsArray[i].interval, this.selectionsArray[i].xp);
+        this.selectionsArray[i].processing = true;
+      }
+    }
   }
 }
 
