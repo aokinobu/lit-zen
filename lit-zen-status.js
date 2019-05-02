@@ -29,41 +29,54 @@ class ZenStatusElement extends LitElement {
     this.selectionsArray = [];
   }
 
-  firstUpdated(changedProperties) {
-    // let elements = this.shadowRoot.querySelectorAll('zen-menu-selection');
-    // let i = 0;
-    // for(i = 0; i < elements.length; i++) {
-    //   elements[i].startWorker();
-    // }
+  checkStorage(changedProps) {
+    console.log(changedProps);
+    if (typeof (Storage) !== "undefined") {
+      this.checkStorage();
+    } else {
+      // this.shadowRoot.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+    }
+  }
+
+  checkStorage() {
+    if (localStorage.statusSelectionsArray === undefined) {
+      this.storeArray();
+    } else {
+      this.loadArray();
+    }
+  }
+
+  storeArray() {
+    console.log("store status");
+    console.log(this.selectionsArray);
+    localStorage.statusSelectionsArray = JSON.stringify(this.selectionsArray);
+  }
+
+  loadArray() {
+    console.log("load status");
+    this.selectionsArray = JSON.parse(localStorage.statusSelectionsArray);
   }
 
   get renderSelections() {
     return this.selectionsArray.map(i => html`<zen-menu-selection id="${i.name}" selectionName=${i.name} isMenu="false"></zen-menu-selection>`);
   }
 
-  updated(changedProperties) {
-    this.checkIntervals();
-  }
-
-  async addSelection(name) {
-    console.log("addSelection");
-    console.log(name);
+  addSelection(name) {
     this.selectionsArray.push(name);
     this.requestUpdate();
+    this.storeArray();
   }
 
   checkIntervals() {
-    console.log("checking intervals");
     let i = 0;
     for (i = 0; i < this.selectionsArray.length; i++) {
-      console.log(this.selectionsArray[i].name);
-      console.log(this.selectionsArray[i].processing);
       if (this.selectionsArray[i].processing === undefined || !this.selectionsArray[i].processing) {
         let element = this.shadowRoot.getElementById(this.selectionsArray[i].name);
         element.startWorker(this.selectionsArray[i].interval, this.selectionsArray[i].xp);
         this.selectionsArray[i].processing = true;
       }
     }
+    this.storeArray();
   }
 }
 

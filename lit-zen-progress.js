@@ -5,17 +5,7 @@ class ZenProgressElement extends LitElement {
   static get properties() {
     return {
       xp: {
-        type: Number,
-        // hasChanged(newVal, oldVal) {
-        //   if (newVal > oldVal) {
-        //     // console.log(`${newVal} > ${oldVal}. hasChanged: true.`);
-        //     return true;
-        //   }
-        //   else {
-        //     // console.log(`${newVal} <= ${oldVal}. hasChanged: false.`);
-        //     return false;
-        //   }
-        // }
+        type: Number
       }
     };
   }
@@ -34,6 +24,22 @@ class ZenProgressElement extends LitElement {
   constructor() {
     super();
     this.xp = 0;
+  }
+
+  updated(changedProps) {
+    this.checkStorage(changedProps);
+  }
+
+  checkStorage(changedProps) {
+    if (typeof(Storage) !== "undefined") {
+      if (localStorage.xp === undefined || changedProps.get("xp") !== undefined) {
+        localStorage.xp = this.xp;
+      } else {
+          this.xp = Number(localStorage.xp);
+      }
+    } else {
+      // this.shadowRoot.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+    }
   }
 
   click() {

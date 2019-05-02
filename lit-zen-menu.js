@@ -32,6 +32,44 @@ class ZenMenuElement extends LitElement {
     this.menu = "";
     // static array of selection data
     this.selectionsArray = [{ name: "lift", display: false, displayCondition: 100, cost: 100, purchased: false, xp: 10, interval: 1000 }, { name: "spell", display: false, displayCondition: 500, cost: 500, purchased: false, xp: 1000, interval: 2000 }];
+    this.checkStorage();
+  }
+
+  updated(changedProps) {
+    this.checkStorage(changedProps);
+  }
+
+  checkStorage(changedProps) {
+    console.log(changedProps);
+    if (typeof (Storage) !== "undefined") {
+      if (localStorage.menuxp === undefined || changedProps.get("xp") !== undefined) {
+        localStorage.menuxp = this.xp;
+      } else {
+        this.xp = Number(localStorage.menuxp);
+      }
+    } else {
+      // this.shadowRoot.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+    }
+    this.checkStorage();
+  }
+
+  checkStorage() {
+    if (localStorage.menuSelectionsArray === undefined) {
+      this.storeArray();
+    } else {
+      this.loadArray();
+    }
+  }
+
+  storeArray() {
+    console.log("store menu");
+    console.log(this.selectionsArray);
+    localStorage.menuSelectionsArray = JSON.stringify(this.selectionsArray);
+  }
+
+  loadArray() {
+    console.log("load menu");
+    this.selectionsArray = JSON.parse(localStorage.menuSelectionsArray);
   }
 
   get renderSelections() {
@@ -50,6 +88,7 @@ class ZenMenuElement extends LitElement {
           this.selectionsArray[i].display = false;
           this.selectionsArray[i].purchased = true;
           this.requestUpdate();
+          this.storeArray();
           // update xp -cost
           let event = new CustomEvent('zen-event-xp-changed', {
             detail: { message: 'xp changed', xp: -this.selectionsArray[i].cost },
@@ -78,6 +117,7 @@ class ZenMenuElement extends LitElement {
       }
     }
     this.requestUpdate();
+    this.storeArray();
   }
 }
 

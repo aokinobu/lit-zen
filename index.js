@@ -52,8 +52,6 @@ solid purple;   } </style>
   }
 
   selectionPurchased(e) {
-    console.log("selectionPurchased");
-    console.log(e.detail.selection);
     let element = this.shadowRoot.querySelector('zen-status');
     element.addSelection(e.detail.selection);
   }
