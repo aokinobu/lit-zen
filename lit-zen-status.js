@@ -191,19 +191,27 @@ class ZenStatusElement extends LitElement {
   }
 
   startWorker() {
+    console.log("start worker");
+    this.result="started";
   if(typeof(Worker) !== "undefined") {
+    this.result="no undefined";
     if(typeof(this.w) == "undefined") {
+    this.result="created worker";
       this.w = new Worker("./menuselectionworker.js");
     }
     this.w.onmessage = function(event) {
+    console.log("received data");
+    console.log(event);
       this.result = event.data;
     };
   } else {
+    console.log("no support");
     this.result = "Sorry, your browser does not support Web Workers...";
   }
 }
 
 stopWorker() { 
+    console.log("stop");
   this.w.terminate();
   this.w = undefined;
 }
