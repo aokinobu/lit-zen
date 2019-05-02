@@ -56,7 +56,11 @@ class ZenMenuElement extends LitElement {
 
 get renderSelectionSlots() {
   // this.selectionsArray.map(i => console.log(i.name));
+<<<<<<< HEAD
       return html`
+=======
+      return html` 
+>>>>>>> d1a6e5765bee3607f7af1156f281b484bec62cab
 ${this.selectionsArray.map(i => i.display? html`<slot name="${i.name}"></slot>`:html``)}
 `
 // ${this.myBool?

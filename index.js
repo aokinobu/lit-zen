@@ -3,6 +3,10 @@ import './lit-zen-progress.js';
 import './lit-zen-menu.js';
 import './lit-zen-menu-selection.js';
 import './lit-zen-status.js';
+<<<<<<< HEAD
+=======
+import './lit-zen-commander.js';
+>>>>>>> d1a6e5765bee3607f7af1156f281b484bec62cab
 
 class ZenElement extends LitElement {
 
@@ -32,6 +36,7 @@ solid purple;   } </style>
       <zen-menu class="xp" >
 ${this.renderSelections}</zen-menu>
 <zen-status></zen-status>
+<<<<<<< HEAD
 
     </div>`;
   }
@@ -39,6 +44,22 @@ ${this.renderSelections}</zen-menu>
   // firstUpdated() {
   //   console.log("zen-main firstUpdated");
   // }
+=======
+    </div>`;
+  }
+  firstUpdated() {
+    console.log("zen-main firstUpdated");
+  }
+
+  updated(changedProps) {
+    console.log("updated");
+    console.log(changedProps.get('xp'));
+  }
+
+  onXpChanged() {
+    console.log("xp changed");
+  }
+>>>>>>> d1a6e5765bee3607f7af1156f281b484bec62cab
 
   modifyXp(e) {
     console.log("xp modified");
@@ -51,6 +72,10 @@ ${this.renderSelections}</zen-menu>
     let element = this.shadowRoot.querySelector('zen-menu');
     element.xp = e.detail.xp;
     console.log(element);
+<<<<<<< HEAD
+=======
+    element.updateMenu();
+>>>>>>> d1a6e5765bee3607f7af1156f281b484bec62cab
   }
 
   handleEvent(e) {
@@ -84,6 +109,7 @@ ${this.renderSelections}</zen-menu>
     console.log("weight");
     console.log(e);
     console.log(e.target.selectionName);
+<<<<<<< HEAD
     let element = this.shadowRoot.querySelector('zen-status');
         let liftSelection = { name: "lift", count: this.elementCount++ };
 
@@ -111,6 +137,14 @@ ${this.renderSelections}</zen-menu>
     console.log(element);
 
   }
+=======
+  }
+  spellCasting(e) {
+    console.log("spellCasting");
+    console.log(e);
+    console.log(e.target.selectionName);
+  }
+>>>>>>> d1a6e5765bee3607f7af1156f281b484bec62cab
 }
 
 customElements.define('lit-zen', ZenElement);
