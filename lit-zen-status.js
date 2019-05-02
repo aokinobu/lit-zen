@@ -163,6 +163,7 @@ class ZenStatusElement extends LitElement {
       let element = this.shadowRoot.getElementById(this.selectionsArray[i].name + this.selectionsArray[i].count);
       console.log("zen-menu-selection");
       console.log(element);
+      element.kickOff();
     }
   }
 }

@@ -1,7 +1,6 @@
 import { LitElement, html } from 'lit-element';
 // import { ZenMenuSelectionElement } from './lit-zen-menu-selection.js';
 
-
 class ZenMenuElement extends LitElement {
 
   static get properties() {
@@ -33,7 +32,7 @@ class ZenMenuElement extends LitElement {
       .menu { color: red;   display: block;  float: left;   border: 1px solid red;   }
        </style>
        <div class="menu">
-      <span class="title">This is the Zen Menu Component.</br></span>
+      <span class="title">This is the Zen Menu Component.<br /></span>
       <span class="tooltip">Current XP:</span><br />
       <span class="xp" >${this.xp}</span><br />
       <span class="tooltip">Current Menu:</span><br />

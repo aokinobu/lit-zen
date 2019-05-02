@@ -27,13 +27,11 @@ solid purple;   } </style>
       <p>Hello, Welcome to ${this.name}!</p>
 
       <span class="tooltip">Here is your progress</span><br />
-      <zen-progress></zen-progress></br>
+      <zen-progress></zen-progress><br />
       <span class="tooltip">Choose something from the menu</span><br />
       <zen-menu class="xp" >
 ${this.renderSelections}</zen-menu>
 <zen-status></zen-status>
-
-
 
     </div>`;
   }
@@ -70,7 +68,6 @@ ${this.renderSelections}</zen-menu>
         //   <zen-menu-selection name=${this.selectionsArray[0].name}>
         //   </zen-menu-selection>
         // </div>
-
 
 
       return html`
