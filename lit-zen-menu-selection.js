@@ -14,11 +14,10 @@ class ZenMenuSelectionElement extends LitElement {
     return html`
       <style> .progress { color: blue;   display: block;  float: left;   border: 1px solid red;   } </style>
       <div class="menuselection">
-      <span class="title">This is the Zen Menu Selection Component.</br></span>
+      <span class="title">This is the Zen Menu Selection Component.<br /></span>
       <span class="tooltip">Selection Name:${this.selectionName}</span><br />
             <button @click=${this.startWorker}>get to work</button>
       <button @click=${this.stopWorker}>stop working</button>
-
       </div>
     `;
   }

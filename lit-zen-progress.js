@@ -46,9 +46,8 @@ class ZenProgressElement extends LitElement {
   // }
 
   click() {
-    this.xp = this.xp + 100;
     let event = new CustomEvent('zen-event-xp-changed', {
-      detail: { message: 'xp changed', xp: this.xp },
+      detail: { message: 'xp changed', xp: 100 },
       bubbles: true,
       composed: true
     });

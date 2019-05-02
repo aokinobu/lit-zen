@@ -113,7 +113,7 @@ class ZenStatusElement extends LitElement {
 
     // }
 
-    return this.selectionsArray.map(i => html`<zen-menu-selection id="${i.name}${i.count}" selectionName=${i.name}></zen-menu-selection>`);
+    return this.selectionsArray.map(i => html`<zen-menu-selection id="${i.name}" selectionName=${i.name}></zen-menu-selection>`);
     // ?checked="${todo.complete}"
     // @change="${ e => this.updateTodoStatus(todo, e.target.checked)}">
     // ${todo.task}
@@ -136,12 +136,11 @@ class ZenStatusElement extends LitElement {
   //   //   selection: new ZenMenuSelectionElement()
   //   // }];
   // }
-  addSelection(name) {
-    this.selectionsArray.push({ name: name, display: true });
-    // , { name: "spell", display: true }
-    // this.selectionsArray = [...this.selectionsArray, {
-    //   selection: new ZenMenuSelectionElement()
-    // }];
+  async addSelection(name) {
+    console.log("addSelection");
+    console.log(name);
+    this.selectionsArray.push(name);
+    this.requestUpdate();
   }
 
   get footerTemplate() {

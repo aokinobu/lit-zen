@@ -18,7 +18,9 @@ class ZenElement extends LitElement {
   constructor() {
     super();
     this.name = 'Zen Project';
-    this.addEventListener('zen-event-xp-changed', this.modifyXp);
+    this.addEventListener('zen-event-xp-changed', this.xpChanged);
+    this.addEventListener('zen-event-console-message', this.consoleMessage);
+    this.addEventListener('zen-event-selection-purchased', this.selectionPurchased);
     this.elementCount = 0;
   }
 
@@ -28,18 +30,17 @@ class ZenElement extends LitElement {
 solid purple;   } </style>
     <div class="zen">
       <p>Hello, Welcome to ${this.name}!</p>
+      <span class="tooltip">Here is your progress</span><br />
       <zen-progress></zen-progress>
       <zen-world></zen-world>
-      <span class="tooltip">Here is your progress</span><br />
-      <zen-progress></zen-progress><br />
       <span class="tooltip">Choose something from the menu</span><br />
-      <zen-menu class="xp" >
-${this.renderSelections}</zen-menu>
-<zen-status></zen-status>
-
+      <zen-menu class="xp" ></zen-menu>
+      <zen-status></zen-status>
+      console message:${this.message}
     </div>`;
   }
 
+  // <zen-menu class="xp" >${this.renderSelections}</zen-menu>
   // firstUpdated() {
   //   console.log("zen-main firstUpdated");
   // }
@@ -55,7 +56,7 @@ ${this.renderSelections}</zen-menu>
 
 
 
-  modifyXp(e) {
+  xpChanged(e) {
     console.log("xp modified");
     console.log(e);
     console.log(e.detail.message);
@@ -63,11 +64,21 @@ ${this.renderSelections}</zen-menu>
 
     // click.detail.xp=this.xp;
 
+    let elementProgress = this.shadowRoot.querySelector('zen-progress');
+    elementProgress.xp = elementProgress.xp + e.detail.xp;
     let element = this.shadowRoot.querySelector('zen-menu');
     element.xp = element.xp + e.detail.xp;
+    element.checkDisplayCondition();
     console.log(element);
     // this.updateComplete();
   }
+
+  consoleMessage(e) {
+    console.log("xp modified");
+    console.log(e);
+    this.message = e.detail.message;
+  }
+
 
   handleEvent(e) {
     console.log(e.bubbles);
@@ -126,6 +137,13 @@ ${this.renderSelections}</zen-menu>
     // element.addSelection(liftSelection);
     console.log(element);
 
+  }
+
+  selectionPurchased(e) {
+    console.log("selectionPurchased");
+    console.log(e.detail.selection);
+    let element = this.shadowRoot.querySelector('zen-status');
+    element.addSelection(e.detail.selection);
   }
 }
 
