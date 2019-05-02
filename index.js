@@ -4,6 +4,8 @@ import './lit-zen-menu.js';
 import './lit-zen-menu-selection.js';
 import './lit-zen-status.js';
 import './lit-zen-commander.js';
+import './lit-zen-world.js';
+import './lit-zen-game.js';
 
 class ZenElement extends LitElement {
 
@@ -25,10 +27,8 @@ class ZenElement extends LitElement {
 solid purple;   } </style>
     <div class="zen">
       <p>Hello, Welcome to ${this.name}!</p>
-
-      <span class="tooltip">Here is your progress</span><br />
-      <zen-progress></zen-progress></br>
-      <span class="tooltip">Choose something from the menu</span><br />
+      <zen-progress></zen-progress>
+      <zen-world></zen-world>
       <zen-menu class="xp" >
 ${this.renderSelections}</zen-menu>
 <zen-status></zen-status>
@@ -58,7 +58,7 @@ ${this.renderSelections}</zen-menu>
     let element = this.shadowRoot.querySelector('zen-menu');
     element.xp = e.detail.xp;
     console.log(element);
-    element.updateMenu();
+    // element.updateMenu();
   }
 
   handleEvent(e) {

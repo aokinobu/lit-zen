@@ -27,8 +27,7 @@ class ZenStatusElement extends LitElement {
 
   render() {
     return html`
-      <style> .xp { color: orange;   display: block;  float: left;   border: 1px solid orange;   }
-      .menu { color: red;   display: block;  float: left;   border: 1px solid red;   }
+      <style> .zen-status { color: DarkBlue;   display: block;  clear: both;   border: 1px solid DarkBlue;   }
        </style>
        <div class="zen-status">
       <span class="title">This is the Zen Status Component.</br></span>
