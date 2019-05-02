@@ -16,6 +16,9 @@ class ZenMenuSelectionElement extends LitElement {
       <div class="menuselection">
       <span class="title">This is the Zen Menu Selection Component.</br></span>
       <span class="tooltip">Selection Name:${this.selectionName}</span><br />
+            <button @click=${this.startWorker}>get to work</button>
+      <button @click=${this.stopWorker}>stop working</button>
+
       </div>
     `;
   }
@@ -24,6 +27,7 @@ class ZenMenuSelectionElement extends LitElement {
     super();
     this.selectionName = "";
     this.running = false;
+    this.timer = undefined;
   }
 
   // firstUpdated() {
@@ -34,6 +38,34 @@ class ZenMenuSelectionElement extends LitElement {
     console.log("kickoff");
 
     console.log(this.selectionName);
+  }
+
+
+    startWorker() {
+    console.log("start worker");
+    this.result = "started";
+    this.timer = setInterval(this.throwXp, 3000, this);
+    console.log(this.timer);
+  }
+
+  stopWorker() {
+    console.log("stop");
+    console.log(this.timer);
+    clearInterval(this.timer);
+  }
+
+    async throwXp(dat) {
+
+    console.log("xp!");
+    // self = dat;
+    dat.result = "xp!";
+
+    let event = new CustomEvent('zen-event-xp-changed', {
+      detail: { message: 'xp changed', xp: 100 },
+      bubbles: true,
+      composed: true
+    });
+    dat.dispatchEvent(event);
   }
 }
 

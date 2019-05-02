@@ -69,8 +69,6 @@ class ZenStatusElement extends LitElement {
       <span class="title">This is the Zen Status Component.<br /></span>
       <span class="tooltip">Current Selections:</span><br />
       <span class="selections" >${this.renderSelections}</span><br />
-      <button @click=${this.startWorker}>hi</button>
-      <button @click=${this.stopWorker}>stop</button>
 
       result:${this.result}
 
@@ -91,7 +89,6 @@ class ZenStatusElement extends LitElement {
     // this.canvas = this.shadowRoot.createElement('canvas');
     // this.shadowRoot.appendChild(this.canvas);
     this.addEventListener('resize', this.onResize);
-    this.timer = undefined;
 
   }
 
@@ -170,31 +167,9 @@ class ZenStatusElement extends LitElement {
 
   }
 
-  startWorker() {
-    console.log("start worker");
-    this.result = "started";
-    this.timer = setInterval(this.throwXp, 3000, this);
-    console.log(this.timer);
-  }
 
-  stopWorker() {
-    console.log("stop");
-    clearTimeout(this.timer);
-  }
 
-  async throwXp(dat) {
 
-    console.log("xp!");
-    // self = dat;
-    dat.result = "xp!";
-
-    let event = new CustomEvent('zen-event-xp-changed', {
-      detail: { message: 'xp changed', xp: 100 },
-      bubbles: true,
-      composed: true
-    });
-    dat.dispatchEvent(event);
-  }
 }
 
 customElements.define('zen-status', ZenStatusElement);
