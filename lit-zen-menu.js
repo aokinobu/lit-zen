@@ -1,7 +1,6 @@
 import { LitElement, html } from 'lit-element';
 // import { ZenMenuSelectionElement } from './lit-zen-menu-selection.js';
 
-
 class ZenMenuElement extends LitElement {
 
   static get properties() {
@@ -33,7 +32,7 @@ class ZenMenuElement extends LitElement {
       .menu { color: red;   display: block;  float: left;   border: 1px solid red;   }
        </style>
        <div class="menu">
-      <span class="title">This is the Zen Menu Component.</br></span>
+      <span class="title">This is the Zen Menu Component.<br /></span>
       <span class="tooltip">Current XP:</span><br />
       <span class="xp" >${this.xp}</span><br />
       <span class="tooltip">Current Menu:</span><br />
@@ -69,10 +68,10 @@ ${this.selectionsArray.map(i => i.display? html`<slot name="${i.name}"></slot>`:
 /*
   get renderSelections() {
 
-  // ${this.selectionsArray.map(i => html`<li><zen-menu-selection name=${i.name}></zen-menu-selection></li>`)}    
+  // ${this.selectionsArray.map(i => html`<li><zen-menu-selection name=${i.name}></zen-menu-selection></li>`)}
 
     // return this.selections.map(
-      // selection => html` 
+      // selection => html`
         // <div class="zen-selections">
         //   <zen-menu-selection name=${this.selectionsArray[0].name}>
         //   </zen-menu-selection>
@@ -80,14 +79,14 @@ ${this.selectionsArray.map(i => i.display? html`<slot name="${i.name}"></slot>`:
 
 
 
-      return html` 
+      return html`
         <div class="zen-selections">
           <zen-menu-selection name="weight training">
           </zen-menu-selection>
         </div>
       `
-            // ?checked="${todo.complete}" 
-            // @change="${ e => this.updateTodoStatus(todo, e.target.checked)}"> 
+            // ?checked="${todo.complete}"
+            // @change="${ e => this.updateTodoStatus(todo, e.target.checked)}">
             // ${todo.task}
     // );
   }
@@ -109,7 +108,7 @@ ${this.selectionsArray.map(i => i.display? html`<slot name="${i.name}"></slot>`:
   }
 
   addSelection() {
-    // this.selectionsArray = [...this.selectionsArray, { 
+    // this.selectionsArray = [...this.selectionsArray, {
     //   selection: new ZenMenuSelectionElement()
     // }];
   }

@@ -23,10 +23,17 @@ class ZenMenuSelectionElement extends LitElement {
   constructor() {
     super();
     this.selectionName = "";
+    this.running = false;
   }
 
-  firstUpdated() {
-    console.log("zen-menu-selection firstUpdated");
+  // firstUpdated() {
+  //   console.log("zen-menu-selection firstUpdated");
+  // }
+
+  kickOff() {
+    console.log("kickoff");
+
+    console.log(this.selectionName);
   }
 }
 
