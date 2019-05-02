@@ -33,7 +33,6 @@ class ZenProgressElement extends LitElement {
 
   updated(changedProps) {
     super.updated(changedProps);
-    this.load();
   }
 
   checkStorage(changedProps) {

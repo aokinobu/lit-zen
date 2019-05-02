@@ -58,14 +58,11 @@ class ZenStatusElement extends LitElement {
   }
 
   storeArray() {
-    console.log("store status");
-    console.log(this.selectionsArray);
     localStorage.statusSelectionsArray = JSON.stringify(this.selectionsArray);
   }
 
   loadArray() {
     if (localStorage.statusSelectionsArray !== undefined) {
-      console.log("load status");
       this.selectionsArray = JSON.parse(localStorage.statusSelectionsArray);
     }
   }
@@ -81,7 +78,6 @@ class ZenStatusElement extends LitElement {
   }
 
   checkIntervals() {
-    console.log("checkIntervals");
     let i = 0;
     for (i = 0; i < this.selectionsArray.length; i++) {
       if (this.selectionsArray[i].processing === undefined || !this.selectionsArray[i].processing) {
@@ -94,8 +90,6 @@ class ZenStatusElement extends LitElement {
   }
 
   async updateIntervals() {
-    console.log("updateIntervals");
-    console.log(this.selectionsArray);
     await this.updateComplete;
     let i = 0;
     for (i = 0; i < this.selectionsArray.length; i++) {

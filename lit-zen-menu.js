@@ -32,52 +32,44 @@ class ZenMenuElement extends LitElement {
     this.menu = "";
     // static array of selection data
     this.selectionsArray = [{ name: "lift", display: false, displayCondition: 100, cost: 100, purchased: false, xp: 10, interval: 1000 }, { name: "spell", display: false, displayCondition: 500, cost: 500, purchased: false, xp: 1000, interval: 2000 }];
-    this.checkStorage();
   }
 
   firstUpdated(changedProps) {
     super.firstUpdated(changedProps);
-    this.loadArray();
+    this.load();
   }
 
   updated(changedProps) {
     super.updated(changedProps);
-    this.loadArray();
   }
 
-  checkStorage(changedProps) {
-    console.log(changedProps);
+  store() {
     if (typeof (Storage) !== "undefined") {
-      if (localStorage.menuxp !== undefined) {
-        this.xp = Number(localStorage.menuxp);
-      } else {
-        localStorage.menuxp = this.xp;
-      }
-      this.checkStorageArray();
+      localStorage.menuxp = this.xp;
+      this.storeArray();
     } else {
       // this.shadowRoot.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
     }
   }
 
-  checkStorageArray() {
-    if (localStorage.menuSelectionsArray === undefined) {
-      this.storeArray();
-    } else {
+  load() {
+    if (typeof (Storage) !== "undefined") {
+      if (localStorage.menuxp !== undefined) {
+        this.xp = Number(localStorage.menuxp);
+      }
       this.loadArray();
+    } else {
+      // this.shadowRoot.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
     }
   }
 
   storeArray() {
-    console.log("store menu");
-    console.log(this.selectionsArray);
     localStorage.menuSelectionsArray = JSON.stringify(this.selectionsArray);
   }
 
   loadArray() {
     if (localStorage.menuSelectionsArray !== undefined) {
-      console.log("load menu");
       this.selectionsArray = JSON.parse(localStorage.menuSelectionsArray);
-      console.log(this.selectionsArray);
     }
   }
 
@@ -86,7 +78,6 @@ class ZenMenuElement extends LitElement {
   }
 
   checkCost(e) {
-    console.log("checkCost");
     var source = e.target || e.srcElement;
     // check the cost if xpcost < current xp
     let i = 0;
@@ -126,13 +117,13 @@ class ZenMenuElement extends LitElement {
         this.selectionsArray[i].display = true;
       }
     }
-    this.requestUpdate();
     this.storeArray();
+    this.requestUpdate();
   }
 
   updateXp(xp) {
     this.xp = xp;
-    this.storeArray();
+    this.store();
   }
 }
 
