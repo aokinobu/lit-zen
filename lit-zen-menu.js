@@ -11,11 +11,12 @@ class ZenMenuElement extends LitElement {
         type: Number,
          hasChanged(newVal, oldVal) {
           if (newVal > oldVal) {
-            console.log(`${newVal} > ${oldVal}. hasChanged: true.`);
+            // console.log(`${newVal} > ${oldVal}. hasChanged: true.`);
+            // kick off rerendering of Selections
             return true;
           }
           else {
-            console.log(`${newVal} <= ${oldVal}. hasChanged: false.`);
+            // console.log(`${newVal} <= ${oldVal}. hasChanged: false.`);
             return false;
           }
         }
@@ -55,8 +56,8 @@ class ZenMenuElement extends LitElement {
   }
 
 get renderSelectionSlots() {
-  this.selectionsArray.map(i => console.log(i.name));
-      return html` 
+  // this.selectionsArray.map(i => console.log(i.name));
+      return html`
 ${this.selectionsArray.map(i => i.display? html`<slot name="${i.name}"></slot>`:html``)}
 `
 // ${this.myBool?
@@ -68,10 +69,10 @@ ${this.selectionsArray.map(i => i.display? html`<slot name="${i.name}"></slot>`:
 /*
   get renderSelections() {
 
-  // ${this.selectionsArray.map(i => html`<li><zen-menu-selection name=${i.name}></zen-menu-selection></li>`)}    
+  // ${this.selectionsArray.map(i => html`<li><zen-menu-selection name=${i.name}></zen-menu-selection></li>`)}
 
     // return this.selections.map(
-      // selection => html` 
+      // selection => html`
         // <div class="zen-selections">
         //   <zen-menu-selection name=${this.selectionsArray[0].name}>
         //   </zen-menu-selection>
@@ -79,14 +80,14 @@ ${this.selectionsArray.map(i => i.display? html`<slot name="${i.name}"></slot>`:
 
 
 
-      return html` 
+      return html`
         <div class="zen-selections">
           <zen-menu-selection name="weight training">
           </zen-menu-selection>
         </div>
       `
-            // ?checked="${todo.complete}" 
-            // @change="${ e => this.updateTodoStatus(todo, e.target.checked)}"> 
+            // ?checked="${todo.complete}"
+            // @change="${ e => this.updateTodoStatus(todo, e.target.checked)}">
             // ${todo.task}
     // );
   }
@@ -108,7 +109,7 @@ ${this.selectionsArray.map(i => i.display? html`<slot name="${i.name}"></slot>`:
   }
 
   addSelection() {
-    // this.selectionsArray = [...this.selectionsArray, { 
+    // this.selectionsArray = [...this.selectionsArray, {
     //   selection: new ZenMenuSelectionElement()
     // }];
   }
