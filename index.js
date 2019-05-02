@@ -61,8 +61,9 @@ ${this.renderSelections}</zen-menu>
     // click.detail.xp=this.xp;
 
     let element = this.shadowRoot.querySelector('zen-menu');
-    element.xp = e.detail.xp;
+    element.xp = element.xp + e.detail.xp;
     console.log(element);
+    // this.updateComplete();
   }
 
   handleEvent(e) {

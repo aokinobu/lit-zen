@@ -8,17 +8,17 @@ class ZenMenuElement extends LitElement {
       xp: {
         // notify: true,
         type: Number,
-         hasChanged(newVal, oldVal) {
-          if (newVal > oldVal) {
-            // console.log(`${newVal} > ${oldVal}. hasChanged: true.`);
-            // kick off rerendering of Selections
-            return true;
-          }
-          else {
-            // console.log(`${newVal} <= ${oldVal}. hasChanged: false.`);
-            return false;
-          }
-        }
+        //  hasChanged(newVal, oldVal) {
+        //   if (newVal > oldVal) {
+        //     // console.log(`${newVal} > ${oldVal}. hasChanged: true.`);
+        //     // kick off rerendering of Selections
+        //     return true;
+        //   }
+        //   else {
+        //     // console.log(`${newVal} <= ${oldVal}. hasChanged: false.`);
+        //     return false;
+        //   }
+        // }
       },
       menu: {
         type: String
