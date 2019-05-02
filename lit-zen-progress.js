@@ -28,7 +28,7 @@ class ZenProgressElement extends LitElement {
       <div class="progress">
       <span class="title">This is the Zen Progress Component.</br></span>
       <span class="tooltip"><button @click=${this.click}>Click</button> for XP:${this.xp}</span><br />
-      <zen-commander></zen-commander>
+      <zen-commander commanderName="Player"></zen-commander>
       </div>
     `;
   }
