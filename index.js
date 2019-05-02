@@ -32,15 +32,20 @@ solid purple;   } </style>
       <zen-menu class="xp" >
 ${this.renderSelections}</zen-menu>
 <zen-status></zen-status>
-
-      
-
     </div>`;
   }
+  firstUpdated() {
+    console.log("zen-main firstUpdated");
+  }
 
-  // firstUpdated() {
-  //   console.log("zen-main firstUpdated");
-  // }
+  updated(changedProps) {
+    console.log("updated");
+    console.log(changedProps.get('xp'));
+  }
+
+  onXpChanged() {
+    console.log("xp changed");
+  }
 
   modifyXp(e) {
     console.log("xp modified");
@@ -53,6 +58,7 @@ ${this.renderSelections}</zen-menu>
     let element = this.shadowRoot.querySelector('zen-menu');
     element.xp = e.detail.xp;
     console.log(element);
+    element.updateMenu();
   }
 
   handleEvent(e) {

@@ -1,3 +1,3 @@
-# lit-zen-mcfrkf
+# polymer-zen-main
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/lit-zen-mcfrkf)
+[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/polymer-zen-main)

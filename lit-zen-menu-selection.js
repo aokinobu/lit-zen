@@ -25,9 +25,9 @@ class ZenMenuSelectionElement extends LitElement {
     this.selectionName = "";
   }
 
-  // firstUpdated() {
-  //   console.log("zen-menu-selection firstUpdated");
-  // }
+  firstUpdated() {
+    console.log("zen-menu-selection firstUpdated");
+  }
 }
 
 customElements.define('zen-menu-selection', ZenMenuSelectionElement);
