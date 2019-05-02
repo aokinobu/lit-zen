@@ -10,11 +10,11 @@ class ZenProgressElement extends LitElement {
         type: Number,
         hasChanged(newVal, oldVal) {
           if (newVal > oldVal) {
-            console.log(`${newVal} > ${oldVal}. hasChanged: true.`);
+            // console.log(`${newVal} > ${oldVal}. hasChanged: true.`);
             return true;
           }
           else {
-            console.log(`${newVal} <= ${oldVal}. hasChanged: false.`);
+            // console.log(`${newVal} <= ${oldVal}. hasChanged: false.`);
             return false;
           }
         }
@@ -28,6 +28,7 @@ class ZenProgressElement extends LitElement {
       <div class="progress">
       <span class="title">This is the Zen Progress Component.</br></span>
       <span class="tooltip"><button @click=${this.click}>Click</button> for XP:${this.xp}</span><br />
+      <zen-commander></zen-commander>
       </div>
     `;
   }
@@ -38,11 +39,11 @@ class ZenProgressElement extends LitElement {
     this.xp = 0;
   }
 
-  firstUpdated() {
-    console.log("zen-progress firstUpdated");
+  // firstUpdated() {
+  //   console.log("zen-progress firstUpdated");
 
-    console.log(this.xp)
-  }
+  //   console.log(this.xp)
+  // }
 
   click() {
     this.xp = this.xp + 100;

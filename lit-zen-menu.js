@@ -8,7 +8,18 @@ class ZenMenuElement extends LitElement {
     return {
       xp: {
         // notify: true,
-        type: Number
+        type: Number,
+         hasChanged(newVal, oldVal) {
+          if (newVal > oldVal) {
+            // console.log(`${newVal} > ${oldVal}. hasChanged: true.`);
+            // kick off rerendering of Selections
+            return true;
+          }
+          else {
+            // console.log(`${newVal} <= ${oldVal}. hasChanged: false.`);
+            return false;
+          }
+        }
       },
       menu: {
         type: String
@@ -26,7 +37,7 @@ class ZenMenuElement extends LitElement {
       <span class="tooltip">Current XP:</span><br />
       <span class="xp" >${this.xp}</span><br />
       <span class="tooltip">Current Menu:</span><br />
- <slot name="lift"></slot>
+ ${this.renderSelectionSlots}
 
   ${this.footerTemplate}
       </div>
@@ -38,11 +49,24 @@ class ZenMenuElement extends LitElement {
     super();
     this.xp = 0;
     this.menu = "";
-    this.selectionsArray = [ { name: "spell training" }, { name: "weight training"} ];
+    // static array of selection type
+    this.selectionsArray = [ { name: "lift", display: true }, { name: "spell", display: true} ];
     // this.selection = new ZenMenuSelectionElement("weight training");
 
   }
 
+get renderSelectionSlots() {
+  // this.selectionsArray.map(i => console.log(i.name));
+      return html` 
+${this.selectionsArray.map(i => i.display? html`<slot name="${i.name}"></slot>`:html``)}
+`
+// ${this.myBool?
+//     html`<p>Render some HTML if myBool is true</p>`:
+//     html`<p>Render some other HTML if myBool is false</p>`}
+// <slot name="lift"></slot>
+
+}
+/*
   get renderSelections() {
 
   // ${this.selectionsArray.map(i => html`<li><zen-menu-selection name=${i.name}></zen-menu-selection></li>`)}    
@@ -67,14 +91,15 @@ class ZenMenuElement extends LitElement {
             // ${todo.task}
     // );
   }
+  */
 
-  updateMenu() {
-    console.log("menu was updated when XP was:" + this.xp);
+  // updateMenu() {
+  //   console.log("menu was updated when XP was:" + this.xp);
 
-    this.menu = "menu was updated when XP was:" + this.xp;
+  //   this.menu = "menu was updated when XP was:" + this.xp;
 
-    // loop through Selections, check cost to add to displayed.
-  }
+  //   // loop through Selections, check cost to add to displayed.
+  // }
 
   selectionClick(e) {
     console.log(e);

@@ -2,6 +2,8 @@ import { LitElement, html } from 'lit-element';
 import './lit-zen-progress.js';
 import './lit-zen-menu.js';
 import './lit-zen-menu-selection.js';
+import './lit-zen-status.js';
+import './lit-zen-commander.js';
 
 class ZenElement extends LitElement {
 
@@ -29,11 +31,9 @@ solid purple;   } </style>
       <span class="tooltip">Choose something from the menu</span><br />
       <zen-menu class="xp" >
 ${this.renderSelections}</zen-menu>
-      
-
+<zen-status></zen-status>
     </div>`;
   }
-
   firstUpdated() {
     console.log("zen-main firstUpdated");
   }
@@ -61,15 +61,6 @@ ${this.renderSelections}</zen-menu>
     element.updateMenu();
   }
 
-  modifyXpClick(e) {
-    console.log("click xp modified");
-    console.log(e);
-    console.log(e.composedPath()[0])
-    let element = this.shadowRoot.querySelector('zen-menu');
-    console.log(element);
-    element.updateMenu();
-  }
-
   handleEvent(e) {
     console.log(e.bubbles);
   }
@@ -90,6 +81,7 @@ ${this.renderSelections}</zen-menu>
 
       return html` 
 <p slot="lift"><zen-menu-selection selectionName="weight lifting" @click="${this.weightLifting}"></zen-menu-selection></p>
+<p slot="spell"><zen-menu-selection selectionName="spell casting" @click="${this.spellCasting}"></zen-menu-selection></p>
       `
             // ?checked="${todo.complete}" 
             // @change="${ e => this.updateTodoStatus(todo, e.target.checked)}"> 
@@ -97,10 +89,16 @@ ${this.renderSelections}</zen-menu>
     // );
   }
 
-  weightLifting() {
+  weightLifting(e) {
     console.log("weight");
+    console.log(e);
+    console.log(e.target.selectionName);
   }
-
+  spellCasting(e) {
+    console.log("spellCasting");
+    console.log(e);
+    console.log(e.target.selectionName);
+  }
 }
 
 customElements.define('lit-zen', ZenElement);
