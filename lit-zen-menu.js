@@ -1,5 +1,4 @@
 import { LitElement, html } from 'lit-element';
-// import { ZenMenuSelectionElement } from './lit-zen-menu-selection.js';
 
 class ZenMenuElement extends LitElement {
 
@@ -8,7 +7,7 @@ class ZenMenuElement extends LitElement {
       xp: {
         // notify: true,
         type: Number,
-         hasChanged(newVal, oldVal) {
+        hasChanged(newVal, oldVal) {
           console.log(`${newVal} ${oldVal}. hasChanged: true.`);
           return true;
         }
@@ -24,67 +23,47 @@ class ZenMenuElement extends LitElement {
       <style> .xp { color: orange;   display: block;  float: left;   border: 1px solid orange;   }
       .menu { color: red;   display: block;  float: left;   border: 1px solid red;   }
        </style>
-       <div class="menu">
-      <span class="title">This is the Zen Menu Component.<br /></span>
-      <span class="tooltip">Current XP:</span><br />
-      <span class="xp" >${this.xp}</span><br />
-      <span class="tooltip">Current Menu:</span><br />
- ${this.renderSelections}
-
-  ${this.footerTemplate}
+      <div class="menu">
+        <span class="title">This is the Zen Menu Component.<br /></span>
+        <span class="tooltip">Current Menu:</span><br />
+        ${this.renderSelections}
       </div>
     `;
-        // ${this.renderSelections}
   }
 
   constructor() {
     super();
     this.xp = 0;
     this.menu = "";
-    // static array of selection type
-    this.selectionsArray = [ { name: "lift", display: false, displayCondition: 100, cost: 100, purchased: false }, { name: "spell", display: false, displayCondition: 500, cost: 500, purchased: false} ];
-    console.log("this.selectionsArray");
-    console.log(this.selectionsArray);
-    // this.selection = new ZenMenuSelectionElement("weight training");
-
+    // static array of selection data
+    this.selectionsArray = [{ name: "lift", display: false, displayCondition: 100, cost: 100, purchased: false }, { name: "spell", display: false, displayCondition: 500, cost: 500, purchased: false }];
   }
 
-get renderSelections() {
-      return html`
-${this.selectionsArray.map(i => i.display? html`<zen-menu-selection selectionName="${i.name}" @click="${this.checkCost}" id="${i.name}">`:html``)}
-`;
-}
-
-  selectionClick(e) {
-    console.log(e);
-    let element = this.shadowRoot.querySelector('zen-menu-selection');
-    element.click();
-    console.log(element.name);
+  get renderSelections() {
+    return html`${this.selectionsArray.map(i => i.display ? html`<zen-menu-selection selectionName="${i.name}" @click="${this.checkCost}" id="${i.name}">` : html``)}`;
   }
+
+  // selectionClick(e) {
+  //   let element = this.shadowRoot.querySelector('zen-menu-selection');
+  //   element.click();
+  //   console.log(element.name);
+  // }
 
   checkCost(e) {
-    console.log("checkCost");
-    console.log(e);
     var source = e.target || e.srcElement;
-    console.log(source);
-    console.log(source.id);
-    // id is the same as menuSelectionsArray
-
     // check the cost if xpcost < current xp
     let i = 0;
     for (i = 0; i < this.selectionsArray.length; ++i) {
       console.log(this.selectionsArray[i]);
-      if(this.selectionsArray[i].name === source.id) {
-        console.log("source id matches");
-        console.log(this.xp);
-        console.log(this.selectionsArray[i].cost);
-        // remove selection from menu
-        // update xp -cost
+      // id of element is the same as menuSelectionsArray
+      if (this.selectionsArray[i].name === source.id) {
         if (this.selectionsArray[i].cost < this.xp) {
-          this.selectionsArray[i].display=false;
-          this.selectionsArray[i].purchased=true;
+          // remove selection from menu
+          this.selectionsArray[i].display = false;
+          this.selectionsArray[i].purchased = true;
           this.requestUpdate();
           console.log(this.selectionsArray[i].cost + "<" + this.xp);
+          // update xp -cost
           let event = new CustomEvent('zen-event-xp-changed', {
             detail: { message: 'xp changed', xp: -this.selectionsArray[i].cost },
             bubbles: true,
@@ -92,6 +71,7 @@ ${this.selectionsArray.map(i => i.display? html`<zen-menu-selection selectionNam
           });
           this.dispatchEvent(event);
 
+          // notify that a menu was selected
           let eventPurchased = new CustomEvent('zen-event-selection-purchased', {
             detail: { message: this.selectionsArray[i].cost + ' selection purchased', selection: this.selectionsArray[i] },
             bubbles: true,
@@ -101,25 +81,16 @@ ${this.selectionsArray.map(i => i.display? html`<zen-menu-selection selectionNam
         }
       }
     }
-    let element = this.shadowRoot.getElementById(source.id);
-    element.disabled = true;
-
   }
 
   checkDisplayCondition() {
-    console.log(this.selectionsArray);
     let i = 0;
     for (i = 0; i < this.selectionsArray.length; ++i) {
-      console.log(this.selectionsArray[i]);
-      if(this.xp > this.selectionsArray[i].displayCondition && !this.selectionsArray[i].purchased) {
-        this.selectionsArray[i].display=true;
+      if (this.xp > this.selectionsArray[i].displayCondition && !this.selectionsArray[i].purchased) {
+        this.selectionsArray[i].display = true;
       }
     }
     this.requestUpdate();
-  }
-
-    get footerTemplate() {
-    return html`<footer>footer</footer>`;
   }
 }
 

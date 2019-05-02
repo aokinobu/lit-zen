@@ -4,20 +4,18 @@ class ZenProgressElement extends LitElement {
 
   static get properties() {
     return {
-      name: {
-        type: String
-      }, xp: {
+      xp: {
         type: Number,
-        hasChanged(newVal, oldVal) {
-          if (newVal > oldVal) {
-            // console.log(`${newVal} > ${oldVal}. hasChanged: true.`);
-            return true;
-          }
-          else {
-            // console.log(`${newVal} <= ${oldVal}. hasChanged: false.`);
-            return false;
-          }
-        }
+        // hasChanged(newVal, oldVal) {
+        //   if (newVal > oldVal) {
+        //     // console.log(`${newVal} > ${oldVal}. hasChanged: true.`);
+        //     return true;
+        //   }
+        //   else {
+        //     // console.log(`${newVal} <= ${oldVal}. hasChanged: false.`);
+        //     return false;
+        //   }
+        // }
       }
     };
   }
@@ -35,15 +33,8 @@ class ZenProgressElement extends LitElement {
 
   constructor() {
     super();
-    this.name = "Zen Progress";
     this.xp = 0;
   }
-
-  // firstUpdated() {
-  //   console.log("zen-progress firstUpdated");
-
-  //   console.log(this.xp)
-  // }
 
   click() {
     let event = new CustomEvent('zen-event-xp-changed', {
@@ -52,16 +43,6 @@ class ZenProgressElement extends LitElement {
       composed: true
     });
     this.dispatchEvent(event);
-  }
-
-  async getMoreState() {
-    return;
-  }
-
-  async changeProp() {
-    this.prop1 = Math.random();
-    await Promise.all(this.updateComplete, this.getMoreState());
-    console.log('Update complete. Other state completed.');
   }
 }
 

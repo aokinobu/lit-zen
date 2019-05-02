@@ -6,6 +6,9 @@ class ZenMenuSelectionElement extends LitElement {
     return {
       selectionName: {
         type: String
+      },
+      isMenu: {
+        type: Boolean
       }
     };
   }
@@ -16,7 +19,7 @@ class ZenMenuSelectionElement extends LitElement {
       <div class="menuselection">
       <span class="title">This is the Zen Menu Selection Component.<br /></span>
       <span class="tooltip">Selection Name:${this.selectionName}</span><br />
-            <button @click=${this.startWorker}>get to work</button>
+      <button @click=${this.startWorker}>get to work</button>
       <button @click=${this.stopWorker}>stop working</button>
       </div>
     `;
@@ -29,20 +32,7 @@ class ZenMenuSelectionElement extends LitElement {
     this.timer = undefined;
   }
 
-  // firstUpdated() {
-  //   console.log("zen-menu-selection firstUpdated");
-  // }
-
-  kickOff() {
-    console.log("kickoff");
-
-    console.log(this.selectionName);
-  }
-
-
-    startWorker() {
-    console.log("start worker");
-    this.result = "started";
+  startWorker() {
     this.timer = setInterval(this.throwXp, 3000, this);
     console.log(this.timer);
   }
@@ -53,7 +43,7 @@ class ZenMenuSelectionElement extends LitElement {
     clearInterval(this.timer);
   }
 
-    async throwXp(dat) {
+  async throwXp(dat) {
 
     console.log("xp!");
     // self = dat;

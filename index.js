@@ -30,113 +30,25 @@ class ZenElement extends LitElement {
 solid purple;   } </style>
     <div class="zen">
       <p>Hello, Welcome to ${this.name}!</p>
-      <span class="tooltip">Here is your progress</span><br />
       <zen-progress></zen-progress>
       <zen-world></zen-world>
-      <span class="tooltip">Choose something from the menu</span><br />
       <zen-menu class="xp" ></zen-menu>
       <zen-status></zen-status>
+      <zen-console></zen-console>
       console message:${this.message}
     </div>`;
   }
 
-  // <zen-menu class="xp" >${this.renderSelections}</zen-menu>
-  // firstUpdated() {
-  //   console.log("zen-main firstUpdated");
-  // }
-
-  firstUpdated() {
-    console.log("zen-main firstUpdated");
-  }
-
-  updated(changedProps) {
-    console.log("updated");
-    console.log(changedProps.get('xp'));
-  }
-
-
-
   xpChanged(e) {
-    console.log("xp modified");
-    console.log(e);
-    console.log(e.detail.message);
-    console.log(e.detail.xp);
-
-    // click.detail.xp=this.xp;
-
     let elementProgress = this.shadowRoot.querySelector('zen-progress');
     elementProgress.xp = elementProgress.xp + e.detail.xp;
     let element = this.shadowRoot.querySelector('zen-menu');
     element.xp = element.xp + e.detail.xp;
     element.checkDisplayCondition();
-    console.log(element);
-    // this.updateComplete();
   }
 
   consoleMessage(e) {
-    console.log("xp modified");
-    console.log(e);
     this.message = e.detail.message;
-  }
-
-
-  handleEvent(e) {
-    console.log(e.bubbles);
-  }
-
-
-  get renderSelections() {
-
-  // ${this.selectionsArray.map(i => html`<li><zen-menu-selection name=${i.name}></zen-menu-selection></li>`)}
-
-    // return this.selections.map(
-      // selection => html`
-        // <div class="zen-selections">
-        //   <zen-menu-selection name=${this.selectionsArray[0].name}>
-        //   </zen-menu-selection>
-        // </div>
-
-
-      return html`
-<p slot="lift"><zen-menu-selection selectionName="weight lifting" @click="${this.weightLifting}"></zen-menu-selection></p>
-<p slot="spell"><zen-menu-selection selectionName="spell casting" @click="${this.spellCasting}"></zen-menu-selection></p>
-      `
-            // ?checked="${todo.complete}"
-            // @change="${ e => this.updateTodoStatus(todo, e.target.checked)}">
-            // ${todo.task}
-    // );
-  }
-
-  weightLifting(e) {
-    console.log("weight");
-    console.log(e);
-    console.log(e.target.selectionName);
-    let element = this.shadowRoot.querySelector('zen-status');
-        let liftSelection = { name: "lift", count: this.elementCount++ };
-
-        element.setAttribute("selectionsArray", JSON.stringify([...element.selectionsArray, liftSelection]));
-        element.checkStatus();
-    // element.selectionsArray = element.selectionsArray push(liftSelection);
-    // element.should
-    // element.addSelection(liftSelection);
-    console.log(element);
-
-  }
-  spellCasting(e) {
-    console.log("spellCasting");
-    console.log(e);
-    console.log(e.target.selectionName);
-    let element = this.shadowRoot.querySelector('zen-status');
-        let liftSelection = { name: "spell", count: this.elementCount++ };
-    // element.selectionsArray.push({ name: "spell", display: true });
-
-        element.setAttribute("selectionsArray", JSON.stringify([...element.selectionsArray, liftSelection]));
-        element.checkStatus();
-    // element.selectionsArray = element.selectionsArray push(liftSelection);
-    // element.should
-    // element.addSelection(liftSelection);
-    console.log(element);
-
   }
 
   selectionPurchased(e) {
