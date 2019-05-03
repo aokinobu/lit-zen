@@ -41,7 +41,6 @@ class ZenStatusElement extends LitElement {
   }
 
   checkStorage(changedProps) {
-    console.log(changedProps);
     if (typeof (Storage) !== "undefined") {
       this.checkStorageArray();
     } else {
@@ -93,11 +92,8 @@ class ZenStatusElement extends LitElement {
     await this.updateComplete;
     let i = 0;
     for (i = 0; i < this.selectionsArray.length; i++) {
-      console.log(this.selectionsArray[i].processing === undefined || this.selectionsArray[i].processing);
       if (this.selectionsArray[i].processing === undefined || this.selectionsArray[i].processing) {
-        console.log(this.selectionsArray[i].name);
         let element = this.shadowRoot.getElementById(this.selectionsArray[i].name);
-        console.log( element);
         element.startWorker(this.selectionsArray[i].interval, this.selectionsArray[i].xp);
       }
     }

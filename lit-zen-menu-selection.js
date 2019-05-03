@@ -32,17 +32,7 @@ class ZenMenuSelectionElement extends LitElement {
     this.interval = undefined;
   }
 
-  // firstUpdated(changedProperties) {
-  //   console.log("firstUpdated");
-  //   console.log(changedProperties);
-  //   console.log(this.isMenu);
-  //   if (this.interval === undefined && !this.isMenu)
-  //     this.startWorker();
-  //   console.log(this.interval);
-  // }
-
   startWorker(time, xp) {
-    console.log("startWorker:>" + time + "<>" + xp + "<")
     this.interval = setInterval(this.throwXp, time, this, xp);
   }
 
