@@ -20,8 +20,9 @@ class ZenStorageElement extends LitElement {
     super();
   }
 
-  click() {
-    localStorage.clear();
+  async click() {
+    await localStorage.clear();
+    location.reload();
   }
 
 }
