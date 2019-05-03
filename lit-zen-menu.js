@@ -15,8 +15,7 @@ class ZenMenuElement extends LitElement {
 
   render() {
     return html`
-      <style> .xp { color: orange;   display: block;  float: left;   border: 1px solid orange;   }
-      .menu { color: red;   display: block;  float: left;   border: 1px solid red;   }
+      <style> .menu { color: red;   display: block;  float: left;   border: 1px solid red;   }
        </style>
       <div class="menu">
         <span class="title">This is the Zen Menu Component.<br /></span>

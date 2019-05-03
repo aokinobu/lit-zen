@@ -7,7 +7,7 @@ class ZenMenuSelectionElement extends LitElement {
       selectionName: {
         type: String
       },
-      isMenu: {
+      showstop: {
         type: Boolean
       }
     };
@@ -15,7 +15,7 @@ class ZenMenuSelectionElement extends LitElement {
 
   render() {
     return html`
-      <style> .progress { color: blue;   display: block;  float: left;   border: 1px solid red;   } </style>
+      <style> .menuselection { color: blue;   display: block;  float: left;   border: 1px solid red;   } </style>
       <div class="menuselection">
       <span class="title">This is the Zen Menu Selection Component.<br /></span>
       <span class="tooltip">Selection Name:${this.selectionName}</span><br />
@@ -28,7 +28,7 @@ class ZenMenuSelectionElement extends LitElement {
     super();
     this.selectionName = "";
     this.running = false;
-    this.isMenu = true;
+    this.showstop = false;
     this.interval = undefined;
   }
 
@@ -50,10 +50,10 @@ class ZenMenuSelectionElement extends LitElement {
   }
 
   get renderMenu() {
-    if (this.isMenu)
-      return html``;
+    if (this.showstop)
+      return html`<button @click=${this.stopWorker}>stop working</button>`;
     else
-      return `<button @click=${this.stopWorker}>stop working</button>`;
+      return html``;
   }
 }
 

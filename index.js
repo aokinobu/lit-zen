@@ -6,6 +6,7 @@ import './lit-zen-status.js';
 import './lit-zen-commander.js';
 import './lit-zen-world.js';
 import './lit-zen-game.js';
+import './lit-zen-storage.js';
 
 class ZenElement extends LitElement {
 
@@ -35,6 +36,7 @@ solid purple;   } </style>
       <zen-menu class="xp" ></zen-menu>
       <zen-status></zen-status>
       <zen-console></zen-console>
+      <zen-storage></zen-storage>
       console message:${this.message}
     </div>`;
   }

@@ -67,7 +67,7 @@ class ZenStatusElement extends LitElement {
   }
 
   get renderSelections() {
-    return this.selectionsArray.map(i => html`<zen-menu-selection id="${i.name}" selectionName=${i.name} isMenu="false"></zen-menu-selection>`);
+    return this.selectionsArray.map(i => html`<zen-menu-selection id="${i.name}" selectionName=${i.name} showstop="true"></zen-menu-selection>`);
   }
 
   async addSelection(name) {
