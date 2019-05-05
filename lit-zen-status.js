@@ -18,15 +18,16 @@ class ZenStatusElement extends LitElement {
       <div class="zen-status">
         <span class="title">This is the Zen Status Component.<br /></span>
         <span class="tooltip">Current Selections:</span><br />
-        <span class="selections" >${this.renderSelections}</span><br />
+        
       </div>
     `;
+    // <span class="selections" >${this.renderSelections}</span><br />
   }
 
   constructor() {
     super();
     // static array of selection type
-    this.selectionsArray = [];
+    this.selectionsArray = {};
   }
 
   firstUpdated(changedProps) {
@@ -70,19 +71,26 @@ class ZenStatusElement extends LitElement {
     return this.selectionsArray.map(i => html`<zen-menu-selection id="${i.name}" selectionName=${i.name} showstop="true"></zen-menu-selection>`);
   }
 
-  async addSelection(name) {
-    this.selectionsArray.push(name);
+  async addSelection(selection) {
+    console.log(selection);
+    console.log(selection.getAttribute("xp"));
+    console.log(selection.getAttribute("interval"));
+
+    this.selectionsArray[selection.id] = selection;
+    this.shadowRoot.appendChild(selection);
+    
     await this.requestUpdate();
     this.checkIntervals();
   }
 
   checkIntervals() {
     let i = 0;
-    for (i = 0; i < this.selectionsArray.length; i++) {
-      if (this.selectionsArray[i].processing === undefined || !this.selectionsArray[i].processing) {
-        let element = this.shadowRoot.getElementById(this.selectionsArray[i].name);
-        element.startWorker(this.selectionsArray[i].interval, this.selectionsArray[i].xp);
-        this.selectionsArray[i].processing = true;
+    for( let selection in this.selectionsArray ) {
+        console.log( selection );
+      if (selection.processing === undefined || !selection.processing) {
+        // let element = this.shadowRoot.getElementById(this.selectionsArray[i].name);
+        selection.startWorker(selection.getAttribute("interval"), selection.getAttribute("xp"));
+        selection.processing = true;
       }
     }
     this.storeArray();
